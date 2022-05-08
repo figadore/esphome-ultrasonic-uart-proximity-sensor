@@ -1,0 +1,10 @@
+template:
+  - binary_sensor:
+      - name: sump_pump_offline
+        state: "{{ as_timestamp(states('sensor.date_time_iso')) - as_timestamp(states.sensor.sump_pump_proximity_sensor.last_updated) > 600 }}"
+
+# Alternatively, do this with a helper, or make another sensor in sump.h
+input_boolean:
+  sump_pump_draining:
+    name: sump_pump_draining
+    icon: mdi:weather-tornado
